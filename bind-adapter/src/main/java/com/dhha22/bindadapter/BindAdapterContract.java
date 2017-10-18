@@ -29,6 +29,8 @@ public interface BindAdapterContract {
 
         void setItem(int position, Item item);
 
+        int getHeaderSize();
+
         void clear();
 
         Item getItem(int position);

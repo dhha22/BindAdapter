@@ -10,7 +10,7 @@ ext {
     libraryName = 'bind-adapter'
 
     // Bintray setting info
-    repositoryName = 'module' // Bintray repository name
+    repositoryName = 'maven' // Bintray repository name
     packageName = 'com.dhha22' // module name
 
     description = 'bind adapter'

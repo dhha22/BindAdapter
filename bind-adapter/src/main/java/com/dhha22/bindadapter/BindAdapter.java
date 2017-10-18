@@ -2,6 +2,7 @@ package com.dhha22.bindadapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -11,12 +12,14 @@ import com.dhha22.bindadapter.listener.OnItemLongClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by DavidHa on 2017. 10. 12..
  */
 
-public class BindAdapter extends AbsAdapter{
+public class BindAdapter extends AbsAdapter {
+    private static final String TAG = "BindAdapter";
     private static final int DEFAULT = 1;
     private static final String HEADER = "header_";
     private static final String FOOTER = "footer_";
@@ -42,6 +45,7 @@ public class BindAdapter extends AbsAdapter{
         if (headerHashes.contains(viewType)) {
             for (View view : headerViews) {
                 if (view.getTag(R.id.tag) != null && Integer.valueOf(view.getTag(R.id.tag).toString()) == viewType) {
+                    Log.v(TAG, "header holder");
                     return new HeaderFooterHolder(view);
                 }
             }
@@ -50,14 +54,17 @@ public class BindAdapter extends AbsAdapter{
         if (footerHashes.contains(viewType)) {
             for (View view : footerViews) {
                 if (view.getTag(R.id.tag) != null && Integer.valueOf(view.getTag(R.id.tag).toString()) == viewType) {
+                    Log.v(TAG, "footer holder");
                     return new HeaderFooterHolder(view);
                 }
             }
         }
 
         if (innerAdapter != null) {
+            Log.v(TAG, "inner holder");
             return innerAdapter.onCreateViewHolder(parent, viewType);
         } else {
+            Log.v(TAG, "simple holder");
             return new SimpleHolder(getItemView(layoutClass));
         }
     }
@@ -69,11 +76,13 @@ public class BindAdapter extends AbsAdapter{
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (innerAdapter != null) {
-            innerAdapter.onBindViewHolder(holder, position);
-        } else if (!(holder instanceof HeaderFooterHolder)) {
+        if (!(holder instanceof HeaderFooterHolder)) {
             int absPosition = position - headerSize;
-            ((ItemView) holder.itemView).setData(list.get(absPosition));
+            if (innerAdapter != null) {
+                innerAdapter.onBindViewHolder(holder, absPosition);
+            } else {
+                ((ItemView) holder.itemView).setData(list.get(absPosition));
+            }
         }
     }
 
@@ -89,6 +98,11 @@ public class BindAdapter extends AbsAdapter{
             notifyItemInserted(headerViews.size() - 1);
         }
         return this;
+    }
+
+    @Override
+    public int getHeaderSize() {
+        return headerSize;
     }
 
     @Override

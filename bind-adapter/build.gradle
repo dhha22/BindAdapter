@@ -41,6 +41,8 @@ install {
 }
 
 
+
+
 // Bintray setting... and upload
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -48,14 +50,14 @@ bintray {
     user = properties.getProperty('bintrayUser')
     key = properties.getProperty('bintrayApiKey')
 
-//    publications = ['mavenJava']  // When uploading Maven-based publication files
+    //publications = ['mavenJava']  // When uploading Maven-based publication files
     configurations = ['archives'] // When uploading configuration files
 
     publish = true // [Default: false] Whether version should be auto published after an upload
 
     pkg {
         repo = rootProject.ext.repositoryName // Repository name (Created in the repository Bintray site)
-        name = 'bind-adapter'// module name
+        name = project.name// module name
         userOrg = 'davidha' // An optional organization name when the repo belongs to one of the user's orgs
         desc = 'Bind Adapter library' // Optional
         licenses = ['Apache-2.0']
@@ -64,7 +66,6 @@ bintray {
         websiteUrl = rootProject.ext.websiteUrl
         // issueTrackerUrl = '' // Optional
 
-        labels = ['bindadapter', 'android', 'module'] // Optional
         publicDownloadNumbers = true
 
         githubRepo = rootProject.ext.githubRepo // Optional Github repository
@@ -108,4 +109,31 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:recyclerview-v7:26.+'
     testCompile 'junit:junit:4.12'
+}
+
+// JCenter publish
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+// Optional docs
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+// Optional javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+//    archives javadocJar // Optional
+    archives sourcesJar
+}
+
+task findConventions << {
+    println project.getConvention()
 }
