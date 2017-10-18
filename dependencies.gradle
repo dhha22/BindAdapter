@@ -1,0 +1,40 @@
+ext {
+    // Build SDK version
+    buildToolsVersion = '26.0.1'
+    compileSdkVersion = 26
+    targetSdkVersion = 26
+    minSdkVersion = 15
+
+    versionCode = 1
+    libraryVersionName = '0.0.1-alpha'
+    libraryName = 'bind-adapter'
+
+    // Bintray setting info
+    repositoryName = 'module' // Bintray repository name
+    packageName = 'com.dhha22' // module name
+
+    description = 'bind adapter'
+
+    websiteUrl = 'https://github.com/dhha22/BindAdapter' // site url
+    gitHubRepoUrl = 'https://github.com/dhha22/BindAdapter.git' // git repo url
+
+    githubRepo = 'dhha22/BindAdapter'
+    githubReleaseNotesFile = 'CHANGELOG.md'
+
+
+    // Dependencies version
+    supportLibraryVersion = '26.0.1'
+
+    // Testing-only
+    junitLibVersion = '4.12'
+    espressoLibVersion = '2.2.2'
+
+
+    // Support library Dependencies
+    appCompat = "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+
+    // Testing-only dependencies
+    junit = "junit:junit:$rootProject.ext.junitLibVersion"
+
+    espressoCore = "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoLibVersion"
+}
