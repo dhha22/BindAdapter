@@ -6,9 +6,9 @@ Simple Mode
 
 ```java
 BindAdapter adapter = new BindAdapter(this)
-  					.addHeaderView(HeaderView.class)
-  					.addLayout(SimpleListItemView.class)
-  					.addFooterView(FooterView.class);
+                .addHeaderView(HeaderView.class)
+                .addLayout(SimpleListItemView.class)
+                .addFooterView(FooterView.class);
 
 recyclerView.setAdapter(adapter);
 adapter.addHeaderItem(new User("Header", 0));	// add header data
@@ -35,7 +35,8 @@ GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
 recyclerView.setLayoutManager(gridLayoutManager);	// set GridLayoutManager
 
 BindAdapter adapter = new BindAdapter(this)
-  					.addHeaderView(HeaderView.class);
+                .addHeaderView(HeaderView.class);
+
 GridAdapter innerAdapter = new GridAdapter(this);	// inner adapter
 recyclerView.setAdapter(adapter);
 adapter.setInnerAdapter(innerAdapter);
