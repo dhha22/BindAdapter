@@ -76,13 +76,20 @@ public class BindAdapter extends AbsAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (!(holder instanceof HeaderFooterHolder)) {
+        if (!(holder instanceof HeaderFooterHolder)) {  // item
             int absPosition = position - headerSize;
             if (innerAdapter != null) {
                 innerAdapter.onBindViewHolder(holder, absPosition);
             } else {
-                ((ItemView) holder.itemView).setData(list.get(absPosition));
+                ((ItemView) holder.itemView).setData(items.get(absPosition));
             }
+        } else {
+            if (position < headerSize && getHeaderItemSize() > 0 && (getHeaderItemSize() - 1) >= position) {   // header
+                ((ItemView) holder.itemView).setData(headerItems.get(position));
+            } else if (position >= (headerSize + itemCount) && getFooterItemSize() > 0 && getFooterItemSize() >= (position - headerSize - itemCount)) { // footer
+                ((ItemView) holder.itemView).setData(footerItems.get(position - headerSize - itemCount));
+            }
+
         }
     }
 
@@ -101,7 +108,7 @@ public class BindAdapter extends AbsAdapter {
     }
 
     @Override
-    public int getHeaderSize() {
+    public int getHeaderViewSize() {
         return headerSize;
     }
 
@@ -137,6 +144,11 @@ public class BindAdapter extends AbsAdapter {
     }
 
     @Override
+    public int getFooterViewSize() {
+        return footerSize;
+    }
+
+    @Override
     public void removeAllFooterView() {
         footerViews.clear();
         footerHashes.clear();
@@ -146,7 +158,7 @@ public class BindAdapter extends AbsAdapter {
     @Override
     public int getItemCount() {
         headerSize = headerViews.size();
-        itemCount = innerAdapter != null ? innerAdapter.getItemCount() : list.size();
+        itemCount = innerAdapter != null ? innerAdapter.getItemCount() : items.size();
         footerSize = footerViews.size();
         return headerSize + itemCount + footerSize;
     }

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if(position < adapter.getHeaderSize()){
+                if(position < adapter.getHeaderViewSize()){
                     return 3;
                 }
                 return 1;
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
         innerAdapter.addItem(new User("B", 1));
         innerAdapter.addItem(new User("C", 2));
         innerAdapter.addItem(new User("D", 3));
+        adapter.addHeaderItem(new User("David Ha", 0));
+        adapter.notifyDataSetChanged();
     }
 
 

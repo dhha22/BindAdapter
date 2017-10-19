@@ -11,26 +11,68 @@ import java.util.List;
 
 public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAdapterContract.View, BindAdapterContract.Model {
 
-    protected List<Item> list = new ArrayList<>();
+    protected List<Item> headerItems = new ArrayList<>();
+    protected List<Item> footerItems = new ArrayList<>();
+    protected List<Item> items = new ArrayList<>();
+
+    @Override
+    public void addHeaderItem(Item item) {
+        headerItems.add(item);
+    }
+
+    @Override
+    public void setHeaderItem(int position, Item item) {
+        headerItems.set(position, item);
+    }
+
+    @Override
+    public void clearHeaderItem(Item item) {
+        headerItems.clear();
+    }
+
+    @Override
+    public int getHeaderItemSize() {
+        return headerItems.size();
+    }
 
     @Override
     public void addItem(Item item) {
-        list.add(item);
+        items.add(item);
     }
 
     @Override
     public void setItem(int position, Item item) {
-        list.set(position, item);
+        items.set(position, item);
     }
 
     @Override
     public Item getItem(int position) {
-        return list.get(position);
+        return items.get(position);
     }
 
     @Override
-    public void clear() {
-        list.clear();
+    public void clearItem() {
+        items.clear();
+    }
+
+    @Override
+    public void addFooterItem(Item item) {
+        footerItems.add(item);
+    }
+
+    @Override
+    public void setFooterItem(int position, Item item) {
+        footerItems.set(position, item);
+    }
+
+    @Override
+    public void clearFooterItem(Item item) {
+        footerItems.clear();
+    }
+
+    @Override
+    public int getFooterItemSize() {
+        return footerItems.size();
     }
 
     @Override

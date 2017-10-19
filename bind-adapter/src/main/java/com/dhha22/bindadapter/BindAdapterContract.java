@@ -13,9 +13,13 @@ public interface BindAdapterContract {
 
         void removeAllHeaderView();
 
+        int getHeaderViewSize();
+
         BindAdapter addFooterView(Class<? extends ItemView> layoutClass);
 
         void removeAllFooterView();
+
+        int getFooterViewSize();
 
         BindAdapter addLayout(Class<? extends ItemView> layoutClass);
 
@@ -25,15 +29,30 @@ public interface BindAdapterContract {
     }
 
     interface Model {
+
+        void addHeaderItem(Item item);
+
+        void setHeaderItem(int position, Item item);
+
+        void clearHeaderItem(Item item);
+
+        int getHeaderItemSize();
+
         void addItem(Item item);
 
         void setItem(int position, Item item);
 
-        int getHeaderSize();
-
-        void clear();
-
         Item getItem(int position);
+
+        void clearItem();
+
+        void addFooterItem(Item item);
+
+        void setFooterItem(int position, Item item);
+
+        void clearFooterItem(Item item);
+
+        int getFooterItemSize();
 
         void notifyData();
     }
