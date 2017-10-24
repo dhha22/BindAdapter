@@ -28,8 +28,8 @@ public class BindAdapter extends AbsAdapter {
     private int itemCount;
     private final List<Integer> headerHashes = new ArrayList<>();
     private final List<Integer> footerHashes = new ArrayList<>();
-    private final List<View> headerViews = new ArrayList<>();
-    private final List<View> footerViews = new ArrayList<>();
+    private final List<ItemView> headerViews = new ArrayList<>();
+    private final List<ItemView> footerViews = new ArrayList<>();
     private RecyclerView.Adapter innerAdapter;
     private Context context;
     private Class<? extends ItemView> layoutClass;
@@ -43,7 +43,7 @@ public class BindAdapter extends AbsAdapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (headerHashes.contains(viewType)) {
-            for (View view : headerViews) {
+            for (ItemView view : headerViews) {
                 if (view.getTag(R.id.tag) != null && Integer.valueOf(view.getTag(R.id.tag).toString()) == viewType) {
                     Log.v(TAG, "header holder");
                     return new HeaderFooterHolder(view);
@@ -52,7 +52,7 @@ public class BindAdapter extends AbsAdapter {
         }
 
         if (footerHashes.contains(viewType)) {
-            for (View view : footerViews) {
+            for (ItemView view : footerViews) {
                 if (view.getTag(R.id.tag) != null && Integer.valueOf(view.getTag(R.id.tag).toString()) == viewType) {
                     Log.v(TAG, "footer holder");
                     return new HeaderFooterHolder(view);
@@ -196,21 +196,17 @@ public class BindAdapter extends AbsAdapter {
 
 
     private static class HeaderFooterHolder extends RecyclerView.ViewHolder {
-        private HeaderFooterHolder(View itemView) {
+        private HeaderFooterHolder(ItemView itemView) {
             super(itemView);
-            setFullSpan(itemView);
+            itemView.setFullSpan();
         }
     }
 
     private static class SimpleHolder extends RecyclerView.ViewHolder {
         private SimpleHolder(View itemView) {
             super(itemView);
-            setFullSpan(itemView);
         }
     }
 
-    private static void setFullSpan(View itemView) {
-        itemView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-    }
 
 }
