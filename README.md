@@ -1,9 +1,55 @@
 # BindAdapter
 
+## Including in your project
+
+The library is pushed to Maven Central as a AAR, so you just need to add the following dependency to your `build.gradle`.
+```java
+dependencies {
+    compile 'com.dhha22.bindadapter:bind-adapter:0.1.1-alpha@aar'
+}
+
+```
+
 ## Usage
 
-Simple Mode
+### Step 1
+Implement the Item class in your model class
+```java
+public class Feed implements Item {
+    public String name;
 
+    public Feed(String name) {
+        this.name = name;
+    }
+}
+```
+
+### Step 2
+Extend ItemView to the view and override the `setData(Item data)` function
+```java
+public class SimpleListItemView extends ItemView {
+    private TextView nameTxt;
+
+    public SimpleListItemView(@NonNull Context context) {
+        super(context);
+        LayoutInflater.from(context).inflate(R.layout.simple_list_item, this, true);
+        nameTxt = findViewById(R.id.nameTxt);
+    }
+
+    @Override
+    public void setData(Item data) {
+        super.setData(data);
+        if(data instanceof Feed) {
+            nameTxt.setText(((Feed)data).name);
+        }
+    }
+}
+```
+
+### Step 3
+and use it
+
+#### Simple Mode
 ```java
 BindAdapter adapter = new BindAdapter(this)
                 .addHeaderView(HeaderView.class)
@@ -19,7 +65,7 @@ adapter.notifyData();
 
 
 
-Custom Mode (HeaderView + GridView)
+#### Custom Mode (HeaderView + GridView)
 
 ```java
 GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
