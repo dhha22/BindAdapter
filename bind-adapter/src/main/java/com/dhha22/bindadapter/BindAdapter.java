@@ -30,7 +30,7 @@ public class BindAdapter extends AbsAdapter {
     private final List<Integer> footerHashes = new ArrayList<>();
     private final List<ItemView> headerViews = new ArrayList<>();
     private final List<ItemView> footerViews = new ArrayList<>();
-    private RecyclerView.Adapter innerAdapter;
+    protected RecyclerView.Adapter innerAdapter;
     private Context context;
     private Class<? extends ItemView> layoutClass;
     private OnItemClickListener itemClickListener;
@@ -200,16 +200,16 @@ public class BindAdapter extends AbsAdapter {
     }
 
 
-    protected class HeaderFooterHolder extends RecyclerView.ViewHolder {
-        private HeaderFooterHolder(ItemView itemView) {
+    public class HeaderFooterHolder extends RecyclerView.ViewHolder {
+        protected HeaderFooterHolder(ItemView itemView) {
             super(itemView);
             setItemViewClickListener(itemView, this);
             setItemViewLongClickListener(itemView, this);
         }
     }
 
-    protected class SimpleHolder extends RecyclerView.ViewHolder {
-        private SimpleHolder(ItemView itemView) {
+    public class SimpleHolder extends RecyclerView.ViewHolder {
+        protected SimpleHolder(ItemView itemView) {
             super(itemView);
             setItemViewClickListener(itemView, this);
             setItemViewLongClickListener(itemView, this);
