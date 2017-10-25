@@ -47,7 +47,7 @@ public class SimpleListItemView extends ItemView {
 ```
 
 ### Step 3
-and use it
+And use it
 
 #### Simple Mode
 ```java
@@ -59,7 +59,7 @@ BindAdapter adapter = new BindAdapter(this)
 recyclerView.setAdapter(adapter);
 adapter.addHeaderItem(new User("Header", 0));	// add header data
 adapter.addItem(new User("Item", 1));			// add item data
-adapter.addFooterItem(new User("Footer", 2))	// add footer data
+adapter.addFooterItem(new User("Footer", 2));	// add footer data
 adapter.notifyData();
 ```
 
