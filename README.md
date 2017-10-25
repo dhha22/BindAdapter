@@ -2,7 +2,7 @@
 
 ## Including in your project
 
-You must download the [bind-adapter.aar](https://github.com/dhha22/BindAdapter/raw/master/bind-adapter.aar) and save in your project lib folder.
+You must download the [bind-adapter.aar](https://github.com/dhha22/BindAdapter/raw/master/bind-adapter.aar) and save in your project `app/libs` folder.
 
 and you just need to add the following dependency to your `build.gradle`.
 ```java
