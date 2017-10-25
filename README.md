@@ -2,8 +2,18 @@
 
 ## Including in your project
 
-The library is pushed to Maven Central as a AAR, so you just need to add the following dependency to your `build.gradle`.
+You must download the [bind-adapter.aar](https://github.com/dhha22/BindAdapter/raw/master/bind-adapter.aar) and save in your project `app/libs` folder.
+
+and you just need to add the following dependency to your `build.gradle`.
 ```java
+allprojects {
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
 dependencies {
     compile 'com.dhha22.bindadapter:bind-adapter:0.1.1-alpha@aar'
 }
