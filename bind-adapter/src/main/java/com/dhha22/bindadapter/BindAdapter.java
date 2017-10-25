@@ -200,7 +200,7 @@ public class BindAdapter extends AbsAdapter {
     }
 
 
-    private class HeaderFooterHolder extends RecyclerView.ViewHolder {
+    protected class HeaderFooterHolder extends RecyclerView.ViewHolder {
         private HeaderFooterHolder(ItemView itemView) {
             super(itemView);
             setItemViewClickListener(itemView, this);
@@ -208,7 +208,7 @@ public class BindAdapter extends AbsAdapter {
         }
     }
 
-    private class SimpleHolder extends RecyclerView.ViewHolder {
+    protected class SimpleHolder extends RecyclerView.ViewHolder {
         private SimpleHolder(ItemView itemView) {
             super(itemView);
             setItemViewClickListener(itemView, this);

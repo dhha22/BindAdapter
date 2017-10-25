@@ -6,7 +6,7 @@ import com.dhha22.bindadapter.Item;
  * Created by DavidHa on 2017. 10. 12..
  */
 
-public class Feed implements Item{
+public class Feed implements Item {
     public String name;
 
     public Feed(String name) {
