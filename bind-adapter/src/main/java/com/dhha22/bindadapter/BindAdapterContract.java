@@ -46,6 +46,8 @@ public interface BindAdapterContract {
 
         void clearItem();
 
+        int getItemSize();
+
         void addFooterItem(Item item);
 
         void setFooterItem(int position, Item item);

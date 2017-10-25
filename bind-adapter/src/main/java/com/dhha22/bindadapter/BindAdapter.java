@@ -86,7 +86,8 @@ public class BindAdapter extends AbsAdapter {
         } else {
             if (position < headerSize && getHeaderItemSize() > 0 && (getHeaderItemSize() - 1) >= position) {   // header
                 ((ItemView) holder.itemView).setData(headerItems.get(position));
-            } else if (position >= (headerSize + itemCount) && getFooterItemSize() > 0 && getFooterItemSize() >= (position - headerSize - itemCount)) { // footer
+            } else if (position >= (headerSize + itemCount) &&
+                    getFooterItemSize() > 0 && getFooterItemSize() >= (position - headerSize - itemCount)) { // footer
                 ((ItemView) holder.itemView).setData(footerItems.get(position - headerSize - itemCount));
             }
 
@@ -129,6 +130,10 @@ public class BindAdapter extends AbsAdapter {
         return this;
     }
 
+    @Override
+    public int getItemSize() {
+        return itemCount;
+    }
 
     @Override
     public BindAdapter addFooterView(Class<? extends ItemView> layoutClass) {
@@ -195,16 +200,28 @@ public class BindAdapter extends AbsAdapter {
     }
 
 
-    private static class HeaderFooterHolder extends RecyclerView.ViewHolder {
+    private class HeaderFooterHolder extends RecyclerView.ViewHolder {
         private HeaderFooterHolder(ItemView itemView) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemClickListener.onItemClick(v, getAdapterPosition());
+                }
+            });
             itemView.setFullSpan();
         }
     }
 
-    private static class SimpleHolder extends RecyclerView.ViewHolder {
+    private class SimpleHolder extends RecyclerView.ViewHolder {
         private SimpleHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    itemClickListener.onItemClick(v, getAdapterPosition());
+                }
+            });
         }
     }
 

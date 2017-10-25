@@ -8,6 +8,5 @@
     <TextView
         android:id="@+id/nameTxt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="name" />
+        android:layout_height="wrap_content" />
 </LinearLayout>

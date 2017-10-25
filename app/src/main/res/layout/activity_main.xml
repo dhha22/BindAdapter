@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+   <Button
+       android:id="@+id/goSimpleBtn"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Simple Mode"
+       android:layout_margin="40dp"/>
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/goCustomBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goSimpleBtn"
+        android:text="Custom Mode"
+        android:layout_margin="40dp"
+        />
+
+</RelativeLayout>

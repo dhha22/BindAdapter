@@ -11,15 +11,16 @@ import com.dhha22.bindadaptersample.R;
 import com.dhha22.bindadaptersample.model.Feed;
 
 /**
- * Created by DavidHa on 2017. 10. 16..
+ * Created by DavidHa on 2017. 10. 25..
  */
 
-public class HeaderItem1View extends ItemView {
+public class FooterItemView extends ItemView {
+
     private TextView titleTxt;
 
-    public HeaderItem1View(@NonNull Context context) {
+    public FooterItemView(@NonNull Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.header_item_1, this, true);
+        LayoutInflater.from(context).inflate(R.layout.footer_item, this, true);
         titleTxt = findViewById(R.id.titleTxt);
     }
 

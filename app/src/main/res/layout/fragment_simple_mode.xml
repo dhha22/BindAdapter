@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/addHeaderBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="add header item"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addItemBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="add item"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addFooterBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="add footer item"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

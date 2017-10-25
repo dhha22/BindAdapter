@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.dhha22.bindadapter.Item;
 import com.dhha22.bindadapter.ItemView;
 import com.dhha22.bindadaptersample.R;
-import com.dhha22.bindadaptersample.model.User;
+import com.dhha22.bindadaptersample.model.Feed;
 
 /**
  * Created by DavidHa on 2017. 10. 12..
@@ -26,8 +26,8 @@ public class SimpleListItemView extends ItemView {
     @Override
     public void setData(Item data) {
         super.setData(data);
-        if(data instanceof User) {
-            nameTxt.setText(((User)data).name);
+        if(data instanceof Feed) {
+            nameTxt.setText(((Feed)data).name);
         }
     }
 }

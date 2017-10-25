@@ -6,10 +6,10 @@ import com.dhha22.bindadapter.Item;
  * Created by DavidHa on 2017. 10. 12..
  */
 
-public class Feed implements Item {
-    public int id;
+public class Feed implements Item{
+    public String name;
 
-    public Feed(int id) {
-        this.id = id;
+    public Feed(String name) {
+        this.name = name;
     }
 }
