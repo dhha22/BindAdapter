@@ -20,6 +20,7 @@ public class FooterItemView extends ItemView {
 
     public FooterItemView(@NonNull Context context) {
         super(context);
+        setFullSpan();
         LayoutInflater.from(context).inflate(R.layout.footer_item, this, true);
         titleTxt = findViewById(R.id.titleTxt);
     }
@@ -27,7 +28,7 @@ public class FooterItemView extends ItemView {
     @Override
     public void setData(Item data) {
         super.setData(data);
-        if(data instanceof Feed){
+        if (data instanceof Feed) {
             titleTxt.setText(((Feed) data).name);
         }
     }

@@ -203,27 +203,39 @@ public class BindAdapter extends AbsAdapter {
     private class HeaderFooterHolder extends RecyclerView.ViewHolder {
         private HeaderFooterHolder(ItemView itemView) {
             super(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemClickListener.onItemClick(v, getAdapterPosition());
-                }
-            });
-            itemView.setFullSpan();
+            setItemViewClickListener(itemView, this);
+            setItemViewLongClickListener(itemView, this);
         }
     }
 
     private class SimpleHolder extends RecyclerView.ViewHolder {
-        private SimpleHolder(View itemView) {
+        private SimpleHolder(ItemView itemView) {
             super(itemView);
+            setItemViewClickListener(itemView, this);
+            setItemViewLongClickListener(itemView, this);
+        }
+    }
+
+    private void setItemViewClickListener(ItemView itemView, final RecyclerView.ViewHolder holder) {
+        if (itemClickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    itemClickListener.onItemClick(v, getAdapterPosition());
+                    itemClickListener.onItemClick(v, holder.getAdapterPosition());
                 }
             });
         }
     }
 
-
+    private void setItemViewLongClickListener(ItemView itemView, final RecyclerView.ViewHolder holder) {
+        if (itemLongClickListener != null) {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    itemLongClickListener.onItemLongClick(v, holder.getAdapterPosition());
+                    return true;
+                }
+            });
+        }
+    }
 }

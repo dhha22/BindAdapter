@@ -7,7 +7,7 @@ import com.dhha22.bindadapter.BindAdapterContract;
  * Created by DavidHa on 2017. 10. 16..
  */
 
-public class MainPresenter {
+public class SimpleModePresenter {
     private BindAdapterContract.Model adapterModel;
     private BindAdapterContract.View adapterView;
 }

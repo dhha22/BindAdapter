@@ -14,23 +14,37 @@
             android:id="@+id/addHeaderBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="add header item"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="add header item" />
 
         <Button
             android:id="@+id/addItemBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="add item"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="add item" />
 
         <Button
             android:id="@+id/addFooterBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="add footer item"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="add footer item" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/changeOrientationBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="change orientation" />
+
+    <TextView
+        android:id="@+id/orientationTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="14dp"
+        android:text="orientation: vertical" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

@@ -10,16 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dhha22.bindadapter.BindAdapter;
+import com.dhha22.bindadapter.listener.OnItemClickListener;
+import com.dhha22.bindadapter.listener.OnItemLongClickListener;
 import com.dhha22.bindadaptersample.R;
 import com.dhha22.bindadaptersample.model.Feed;
 import com.dhha22.bindadaptersample.view.FooterItemView;
 import com.dhha22.bindadaptersample.view.HeaderItem1View;
 import com.dhha22.bindadaptersample.view.HeaderItem2View;
 import com.dhha22.bindadaptersample.view.SimpleListItemView;
-
-import java.util.logging.Logger;
 
 /**
  * Created by DavidHa on 2017. 10. 25..
@@ -30,6 +32,8 @@ public class SimpleModeFragment extends Fragment {
     private Button addHeaderBtn;
     private Button addItemBtn;
     private Button addFooterBtn;
+    private Button changeOrientationBtn;
+    private TextView orientationTxt;
     private RecyclerView recyclerView;
 
     public static SimpleModeFragment getInstance() {
@@ -46,6 +50,8 @@ public class SimpleModeFragment extends Fragment {
         addHeaderBtn = view.findViewById(R.id.addHeaderBtn);
         addItemBtn = view.findViewById(R.id.addItemBtn);
         addFooterBtn = view.findViewById(R.id.addFooterBtn);
+        changeOrientationBtn = view.findViewById(R.id.changeOrientationBtn);
+        orientationTxt = view.findViewById(R.id.orientationTxt);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         final BindAdapter adapter = new BindAdapter(getContext())
@@ -95,6 +101,39 @@ public class SimpleModeFragment extends Fragment {
                 adapter.notifyData();
             }
         });
+
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getContext(), "click current position: " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(getContext(), "long click current position: " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        changeOrientationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
+                    LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                    if (layoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                        orientationTxt.setText("orientation: vertical");
+                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    } else {
+                        orientationTxt.setText("orientation: horizontal");
+                        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                    }
+                    recyclerView.setLayoutManager(layoutManager);
+                }
+
+            }
+        });
+
         return view;
     }
 

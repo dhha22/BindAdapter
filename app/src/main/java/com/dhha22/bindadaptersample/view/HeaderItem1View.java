@@ -20,6 +20,7 @@ public class HeaderItem1View extends ItemView {
     public HeaderItem1View(@NonNull Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.header_item_1, this, true);
+        setFullSpan();
         titleTxt = findViewById(R.id.titleTxt);
     }
 
