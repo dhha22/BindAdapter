@@ -70,7 +70,7 @@ public class CustomModeFragment extends Fragment {
         innerAdapter.addItem(new Feed("C"));
         innerAdapter.addItem(new Feed("D"));
         adapter.addHeaderItem(new Feed("David Ha"));
-        adapter.notifyDataSetChanged();
+        adapter.notifyData();
     }
 }
 
@@ -101,7 +101,6 @@ class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
     public void addItem(Feed feed) {
         feeds.add(feed);
-        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

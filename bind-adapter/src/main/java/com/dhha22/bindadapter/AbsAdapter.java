@@ -9,8 +9,9 @@ import java.util.List;
  * Created by DavidHa on 2017. 10. 12..
  */
 
-public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAdapterContract.View, BindAdapterContract.Model {
+public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAdapterContract.Model {
 
+    protected RecyclerView.Adapter innerAdapter;
     protected List<Item> headerItems = new ArrayList<>();
     protected List<Item> footerItems = new ArrayList<>();
     protected List<Item> items = new ArrayList<>();
@@ -56,6 +57,11 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     }
 
     @Override
+    public int getItemSize() {
+        return items.size();
+    }
+
+    @Override
     public void addFooterItem(Item item) {
         footerItems.add(item);
     }
@@ -77,6 +83,9 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
 
     @Override
     public void notifyData() {
+        if(innerAdapter != null){
+            innerAdapter.notifyDataSetChanged();
+        }
         notifyDataSetChanged();
     }
 

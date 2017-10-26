@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Created by DavidHa on 2017. 10. 12..
  */
 
-public class BindAdapter extends AbsAdapter {
+public class BindAdapter extends AbsAdapter implements BindAdapterContract.View{
     private static final String TAG = "BindAdapter";
     private static final int DEFAULT = 1;
     private static final String HEADER = "header_";
@@ -30,7 +30,6 @@ public class BindAdapter extends AbsAdapter {
     private final List<Integer> footerHashes = new ArrayList<>();
     private final List<ItemView> headerViews = new ArrayList<>();
     private final List<ItemView> footerViews = new ArrayList<>();
-    protected RecyclerView.Adapter innerAdapter;
     private Context context;
     private Class<? extends ItemView> layoutClass;
     private OnItemClickListener itemClickListener;
@@ -130,10 +129,6 @@ public class BindAdapter extends AbsAdapter {
         return this;
     }
 
-    @Override
-    public int getItemSize() {
-        return itemCount;
-    }
 
     @Override
     public BindAdapter addFooterView(Class<? extends ItemView> layoutClass) {
@@ -215,6 +210,11 @@ public class BindAdapter extends AbsAdapter {
             setItemViewLongClickListener(itemView, this);
         }
     }
+
+    protected void setViewHolder(RecyclerView.ViewHolder viewHolder){
+
+    }
+
 
     private void setItemViewClickListener(ItemView itemView, final RecyclerView.ViewHolder holder) {
         if (itemClickListener != null) {
