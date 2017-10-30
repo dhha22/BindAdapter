@@ -211,11 +211,6 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View{
         }
     }
 
-    protected void setViewHolder(RecyclerView.ViewHolder viewHolder){
-
-    }
-
-
     private void setItemViewClickListener(ItemView itemView, final RecyclerView.ViewHolder holder) {
         if (itemClickListener != null) {
             itemView.setOnClickListener(new View.OnClickListener() {
