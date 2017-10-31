@@ -108,6 +108,11 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View{
     }
 
     @Override
+    public ItemView getHeaderView(int position) {
+        return headerViews.get(position);
+    }
+
+    @Override
     public int getHeaderViewSize() {
         return headerSize;
     }
@@ -129,6 +134,10 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View{
         return this;
     }
 
+    @Override
+    public ItemView getItemView() {
+        return getItemView(layoutClass);
+    }
 
     @Override
     public BindAdapter addFooterView(Class<? extends ItemView> layoutClass) {
@@ -141,6 +150,11 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View{
             notifyItemInserted(headerSize + itemCount + footerViews.size() - 1);
         }
         return this;
+    }
+
+    @Override
+    public ItemView getFooterView(int position) {
+        return footerViews.get(position);
     }
 
     @Override

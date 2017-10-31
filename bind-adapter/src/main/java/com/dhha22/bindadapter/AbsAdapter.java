@@ -16,7 +16,7 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     protected List<Item> headerItems = new ArrayList<>();
     protected List<Item> footerItems = new ArrayList<>();
     protected List<Item> items = new ArrayList<>();
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private final Runnable notifyRunnable = new Runnable() {
         @Override
         public void run() {

@@ -11,17 +11,23 @@ public interface BindAdapterContract {
     interface View {
         BindAdapter addHeaderView(Class<? extends ItemView> layoutClass);
 
+        ItemView getHeaderView(int position);
+
         void removeAllHeaderView();
 
         int getHeaderViewSize();
 
         BindAdapter addFooterView(Class<? extends ItemView> layoutClass);
 
+        ItemView getFooterView(int position);
+
         void removeAllFooterView();
 
         int getFooterViewSize();
 
         BindAdapter addLayout(Class<? extends ItemView> layoutClass);
+
+        ItemView getItemView();
 
         void setOnItemClickListener(OnItemClickListener itemClickListener);
 
