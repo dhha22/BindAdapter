@@ -103,3 +103,26 @@ innerAdapter.addItem(new Feed("inner item2"));
 innerAdapter.addItem(new Feed("inner item3"));
 adapter.notifyData();
 ```
+
+## More options
+### Endless Scroll
+
+#### Step1
+Define ScrollEndSubscriber
+
+```java
+ private ScrollEndSubscriber scrollEndSubscriber = new ScrollEndSubscriber() {
+        @Override
+        public void onScrollEnd() {
+            Toast.makeText(getContext(), "load more data", Toast.LENGTH_SHORT).show();
+            loadMoreData();
+        }
+    };
+```
+#### Step2
+
+And add RecyclerView Scroll Listener
+
+```java
+recyclerView.addOnScrollListener(new EndlessScrollListener(scrollEndSubscriber));
+```
