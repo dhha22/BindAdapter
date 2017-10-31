@@ -19,4 +19,13 @@
         android:layout_margin="40dp"
         />
 
+    <Button
+        android:id="@+id/goEndlessScrollBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goCustomBtn"
+        android:text="Endless Scroll"
+        android:layout_margin="40dp"
+        />
+
 </RelativeLayout>

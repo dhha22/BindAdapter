@@ -12,14 +12,16 @@ public class MainActivity extends AppCompatActivity {
 
     private Button goSimpleBtn;
     private Button goCustomBtn;
+    private Button goEndlessScrollBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        goSimpleBtn = (Button)findViewById(R.id.goSimpleBtn);
-        goCustomBtn = (Button)findViewById(R.id.goCustomBtn);
+        goSimpleBtn = (Button) findViewById(R.id.goSimpleBtn);
+        goCustomBtn = (Button) findViewById(R.id.goCustomBtn);
+        goEndlessScrollBtn = (Button) findViewById(R.id.goEndlessScrollBtn);
 
         goSimpleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Navigator.goCustomMode(MainActivity.this);
+            }
+        });
+
+        goEndlessScrollBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigator.goEndlessScroll(MainActivity.this);
             }
         });
     }
