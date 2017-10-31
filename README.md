@@ -15,7 +15,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.dhha22.bindadapter:bind-adapter:0.1.3-alpha@aar'
+    compile 'com.dhha22.bindadapter:bind-adapter:0.0.1-beta@aar'
 }
 
 ```
@@ -42,7 +42,7 @@ public class SimpleListItemView extends ItemView {
 
     public SimpleListItemView(@NonNull Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.simple_list_item, this, true);
+        setContentView(R.layout.simple_list_item);
         nameTxt = findViewById(R.id.nameTxt);
     }
 
