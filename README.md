@@ -15,7 +15,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.dhha22.bindadapter:bind-adapter:0.0.1-beta@aar'
+    compile 'com.dhha22.bindadapter:bind-adapter:0.1.1-beta@aar'
 }
 
 ```
@@ -102,4 +102,43 @@ innerAdapter.addItem(new Feed("inner item1"));
 innerAdapter.addItem(new Feed("inner item2"));
 innerAdapter.addItem(new Feed("inner item3"));
 adapter.notifyData();
+```
+
+## More options
+### Endless Scroll
+
+#### Step1
+Define ScrollEndSubscriber
+
+```java
+ private ScrollEndSubscriber scrollEndSubscriber = new ScrollEndSubscriber() {
+        @Override
+        public void onScrollEnd() {
+            Toast.makeText(getContext(), "load more data", Toast.LENGTH_SHORT).show();
+            loadMoreData();
+        }
+    };
+```
+#### Step2
+
+And add RecyclerView Scroll Listener
+
+```java
+recyclerView.addOnScrollListener(new EndlessScrollListener(scrollEndSubscriber));
+```
+### License
+```
+Copyright 2017 David Ha
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
