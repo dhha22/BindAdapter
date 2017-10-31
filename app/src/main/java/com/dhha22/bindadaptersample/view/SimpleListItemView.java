@@ -19,7 +19,7 @@ public class SimpleListItemView extends ItemView {
 
     public SimpleListItemView(@NonNull Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.simple_list_item, this, true);
+        setContentView(R.layout.simple_list_item);
         nameTxt = findViewById(R.id.nameTxt);
     }
 

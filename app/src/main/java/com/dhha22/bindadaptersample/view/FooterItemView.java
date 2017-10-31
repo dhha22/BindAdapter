@@ -20,8 +20,8 @@ public class FooterItemView extends ItemView {
 
     public FooterItemView(@NonNull Context context) {
         super(context);
+        setContentView(R.layout.footer_item);
         setFullSpan();
-        LayoutInflater.from(context).inflate(R.layout.footer_item, this, true);
         titleTxt = findViewById(R.id.titleTxt);
     }
 
