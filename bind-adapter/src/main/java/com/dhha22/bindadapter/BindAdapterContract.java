@@ -57,6 +57,8 @@ public interface BindAdapterContract {
         int getFooterItemSize();
 
         void notifyData();
+
+        int getTotalItemSize();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.dhha22.bindadapter;
 
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,6 +16,16 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     protected List<Item> headerItems = new ArrayList<>();
     protected List<Item> footerItems = new ArrayList<>();
     protected List<Item> items = new ArrayList<>();
+    private Handler handler = new Handler();
+    private final Runnable notifyRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (innerAdapter != null) {
+                innerAdapter.notifyDataSetChanged();
+            }
+            notifyDataSetChanged();
+        }
+    };
 
     @Override
     public void addHeaderItem(Item item) {
@@ -83,10 +94,11 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
 
     @Override
     public void notifyData() {
-        if(innerAdapter != null){
-            innerAdapter.notifyDataSetChanged();
-        }
-        notifyDataSetChanged();
+        handler.post(notifyRunnable);
     }
 
+    @Override
+    public int getTotalItemSize() {
+        return headerItems.size() + items.size() + footerItems.size();
+    }
 }
