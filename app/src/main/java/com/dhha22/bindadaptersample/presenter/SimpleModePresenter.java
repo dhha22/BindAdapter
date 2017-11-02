@@ -22,6 +22,7 @@ import com.dhha22.bindadaptersample.view.HeaderItem2View;
 public class SimpleModePresenter implements SimpleModeContract.Presenter,
         OnItemLongClickListener, OnItemClickListener {
     private static final String TAG = "SimpleModePresenter";
+    public SimpleModeContract.View view;
     public BindAdapterContract.Model adapterModel;
     public BindAdapterContract.View adapterView;
 
@@ -63,11 +64,18 @@ public class SimpleModePresenter implements SimpleModeContract.Presenter,
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getContext(), "click current position: " + position, Toast.LENGTH_SHORT).show();
+        this.view.toast("click current position " + position);
     }
 
     @Override
     public void onItemLongClick(View view, int position) {
-        Toast.makeText(getContext(), "long click current position: " + position, Toast.LENGTH_SHORT).show();
+        this.view.toast("long click current position " + position);
+    }
+
+    @Override
+    public void onDestroy() {
+        view = null;
+        adapterView = null;
+        adapterModel = null;
     }
 }

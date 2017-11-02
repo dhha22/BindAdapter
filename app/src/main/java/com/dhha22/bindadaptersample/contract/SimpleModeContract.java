@@ -6,7 +6,7 @@ package com.dhha22.bindadaptersample.contract;
 
 public interface SimpleModeContract {
     interface View {
-
+        void toast(String message);
     }
 
     interface Presenter {
@@ -14,5 +14,6 @@ public interface SimpleModeContract {
         void addListItem();
         void addListFooterItem();
         void loadMoreData();
+        void onDestroy();
     }
 }
