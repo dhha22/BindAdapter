@@ -45,13 +45,7 @@ public class SimpleModeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         recyclerView = new RecyclerView(getContext());
         View view = inflater.inflate(R.layout.fragment_simple_mode, container, false);
-
-        recyclerView = view.findViewById(R.id.recyclerView);
-        addHeaderBtn = view.findViewById(R.id.addHeaderBtn);
-        addItemBtn = view.findViewById(R.id.addItemBtn);
-        addFooterBtn = view.findViewById(R.id.addFooterBtn);
-        changeOrientationBtn = view.findViewById(R.id.changeOrientationBtn);
-        orientationTxt = view.findViewById(R.id.orientationTxt);
+        bindView(view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         final BindAdapter adapter = new BindAdapter(getContext())
@@ -116,25 +110,36 @@ public class SimpleModeFragment extends Fragment {
             }
         });
 
-        changeOrientationBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-                    LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                    if (layoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {
-                        orientationTxt.setText("orientation: vertical");
-                        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                    } else {
-                        orientationTxt.setText("orientation: horizontal");
-                        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                    }
-                    recyclerView.setLayoutManager(layoutManager);
-                }
-
-            }
-        });
+        changeOrientationBtn.setOnClickListener(changeOrientationListener);
 
         return view;
+    }
+
+    private View.OnClickListener changeOrientationListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {
+                    orientationTxt.setText("orientation: vertical");
+                    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                } else {
+                    orientationTxt.setText("orientation: horizontal");
+                    layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                }
+                recyclerView.setLayoutManager(layoutManager);
+            }
+        }
+    };
+
+    private void bindView(View view) {
+        recyclerView = view.findViewById(R.id.recyclerView);
+        addHeaderBtn = view.findViewById(R.id.addHeaderBtn);
+        addItemBtn = view.findViewById(R.id.addItemBtn);
+        addFooterBtn = view.findViewById(R.id.addFooterBtn);
+        changeOrientationBtn = view.findViewById(R.id.changeOrientationBtn);
+        orientationTxt = view.findViewById(R.id.orientationTxt);
+
     }
 
 }
