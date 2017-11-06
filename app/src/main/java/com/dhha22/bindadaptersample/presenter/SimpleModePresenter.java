@@ -38,6 +38,12 @@ public class SimpleModePresenter implements SimpleModeContract.Presenter,
     }
 
     @Override
+    public void addFirstListItem() {
+        adapterModel.addFirstItem(new Feed("Item " + adapterModel.getItemSize()));
+        adapterModel.notifyData();
+    }
+
+    @Override
     public void addListItem() {
         adapterModel.addItem(new Feed("Item " + adapterModel.getItemSize()));
         adapterModel.notifyData();

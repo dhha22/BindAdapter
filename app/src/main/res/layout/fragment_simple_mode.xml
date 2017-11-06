@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -15,7 +15,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="add header item" />
+            android:text="add\nheader\nitem" />
+        <Button
+            android:id="@+id/addFirstItemBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="add\nfirst\nitem" />
 
         <Button
             android:id="@+id/addItemBtn"
@@ -29,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="add footer item" />
+            android:text="add\nfooter\nitem" />
     </LinearLayout>
 
     <Button

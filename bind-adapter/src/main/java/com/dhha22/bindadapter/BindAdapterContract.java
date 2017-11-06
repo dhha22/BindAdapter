@@ -36,6 +36,8 @@ public interface BindAdapterContract {
 
     interface Model {
 
+        // Header
+
         void addHeaderItem(Item item);
 
         void setHeaderItem(int position, Item item);
@@ -44,7 +46,13 @@ public interface BindAdapterContract {
 
         int getHeaderItemSize();
 
+        // Item
+
+        void addFirstItem(Item item);
+
         void addItem(Item item);
+
+        void removeItem(int position);
 
         void setItem(int position, Item item);
 
@@ -54,6 +62,8 @@ public interface BindAdapterContract {
 
         int getItemSize();
 
+        // Footer
+
         void addFooterItem(Item item);
 
         void setFooterItem(int position, Item item);
@@ -61,6 +71,7 @@ public interface BindAdapterContract {
         void clearFooterItem(Item item);
 
         int getFooterItemSize();
+
 
         void notifyData();
 

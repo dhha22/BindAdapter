@@ -27,6 +27,8 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
         }
     };
 
+    // Header
+
     @Override
     public void addHeaderItem(Item item) {
         headerItems.add(item);
@@ -47,9 +49,23 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
         return headerItems.size();
     }
 
+    // Item
+
+
+    @Override
+    public void addFirstItem(Item item) {
+        items.add(0, item);
+    }
+
     @Override
     public void addItem(Item item) {
         items.add(item);
+    }
+
+
+    @Override
+    public void removeItem(int position) {
+        items.remove(position);
     }
 
     @Override
@@ -72,6 +88,8 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
         return items.size();
     }
 
+    // Footer
+
     @Override
     public void addFooterItem(Item item) {
         footerItems.add(item);
@@ -91,6 +109,7 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     public int getFooterItemSize() {
         return footerItems.size();
     }
+
 
     @Override
     public void notifyData() {

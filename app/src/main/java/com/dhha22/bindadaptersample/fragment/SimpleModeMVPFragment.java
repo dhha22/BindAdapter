@@ -27,6 +27,7 @@ import com.dhha22.bindadaptersample.view.SimpleListItemView;
 public class SimpleModeMVPFragment extends Fragment implements SimpleModeContract.View{
     private SimpleModePresenter presenter;
     private Button addHeaderBtn;
+    private Button addFirstItemBtn;
     private Button addItemBtn;
     private Button addFooterBtn;
     private Button changeOrientationBtn;
@@ -64,6 +65,13 @@ public class SimpleModeMVPFragment extends Fragment implements SimpleModeContrac
             @Override
             public void onClick(View v) {
                 presenter.addListHeaderItem();
+            }
+        });
+
+        addFirstItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.addFirstListItem();
             }
         });
 
@@ -115,6 +123,7 @@ public class SimpleModeMVPFragment extends Fragment implements SimpleModeContrac
     private void bindView(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
         addHeaderBtn = view.findViewById(R.id.addHeaderBtn);
+        addFirstItemBtn = view.findViewById(R.id.addFirstItemBtn);
         addItemBtn = view.findViewById(R.id.addItemBtn);
         addFooterBtn = view.findViewById(R.id.addFooterBtn);
         changeOrientationBtn = view.findViewById(R.id.changeOrientationBtn);

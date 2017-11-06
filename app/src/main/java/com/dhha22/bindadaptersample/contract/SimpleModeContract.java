@@ -11,6 +11,7 @@ public interface SimpleModeContract {
 
     interface Presenter {
         void addListHeaderItem();
+        void addFirstListItem();
         void addListItem();
         void addListFooterItem();
         void loadMoreData();

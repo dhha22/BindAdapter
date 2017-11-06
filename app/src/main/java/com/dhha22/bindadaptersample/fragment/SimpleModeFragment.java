@@ -30,6 +30,7 @@ import com.dhha22.bindadaptersample.view.SimpleListItemView;
 public class SimpleModeFragment extends Fragment {
     private static final String TAG = "SimpleModeFragment";
     private Button addHeaderBtn;
+    private Button addFirstItemBtn;
     private Button addItemBtn;
     private Button addFooterBtn;
     private Button changeOrientationBtn;
@@ -73,6 +74,15 @@ public class SimpleModeFragment extends Fragment {
                 }
                 Log.d(TAG, "onClick: add header");
                 adapter.addHeaderItem(new Feed("Header " + adapter.getHeaderItemSize()));
+                adapter.notifyData();
+            }
+        });
+
+        addFirstItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: add first");
+                adapter.addFirstItem(new Feed("Item " + adapter.getItemSize()));
                 adapter.notifyData();
             }
         });
@@ -135,6 +145,7 @@ public class SimpleModeFragment extends Fragment {
     private void bindView(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
         addHeaderBtn = view.findViewById(R.id.addHeaderBtn);
+        addFirstItemBtn = view.findViewById(R.id.addFirstItemBtn);
         addItemBtn = view.findViewById(R.id.addItemBtn);
         addFooterBtn = view.findViewById(R.id.addFooterBtn);
         changeOrientationBtn = view.findViewById(R.id.changeOrientationBtn);
