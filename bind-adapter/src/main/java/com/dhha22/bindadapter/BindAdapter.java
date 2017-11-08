@@ -1,7 +1,9 @@
 package com.dhha22.bindadapter;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,7 @@ import java.util.logging.Logger;
  * Created by DavidHa on 2017. 10. 12..
  */
 
-public class BindAdapter extends AbsAdapter implements BindAdapterContract.View{
+public class BindAdapter extends AbsAdapter implements BindAdapterContract.View {
     private static final String TAG = "BindAdapter";
     private static final int DEFAULT = 1;
     private static final String HEADER = "header_";
@@ -79,10 +81,11 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View{
             int absPosition = position - headerSize;
             if (innerAdapter != null) {
                 innerAdapter.onBindViewHolder(holder, absPosition);
-            } else {
+            } else if (layoutClass != null) {
                 ((ItemView) holder.itemView).setData(items.get(absPosition));
             }
         } else {
+            setStaggeredGridHeader(holder);
             if (position < headerSize && getHeaderItemSize() > 0 && (getHeaderItemSize() - 1) >= position) {   // header
                 ((ItemView) holder.itemView).setData(headerItems.get(position));
             } else if (position >= (headerSize + itemCount) &&
@@ -90,6 +93,14 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View{
                 ((ItemView) holder.itemView).setData(footerItems.get(position - headerSize - itemCount));
             }
 
+        }
+    }
+
+    private void setStaggeredGridHeader(RecyclerView.ViewHolder holder) {
+        if (holder.itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams) {
+            StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
+            params.setFullSpan(true);
+            holder.itemView.setLayoutParams(params);
         }
     }
 
