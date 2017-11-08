@@ -15,7 +15,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.dhha22.bindadapter:bind-adapter:0.2.1-beta@aar'
+    compile 'com.dhha22.bindadapter:bind-adapter:0.2.2-beta@aar'
 }
 
 ```
@@ -68,7 +68,7 @@ BindAdapter adapter = new BindAdapter(this)
 
 recyclerView.setAdapter(adapter);
 adapter.addHeaderItem(new Feed("Header"));	// add header data
-adapter.addItem(new Feed("Item"));			// add item data
+adapter.addItem(new Feed("Item"));		// add item data
 adapter.addFooterItem(new Feed("Footer"));	// add footer data
 adapter.notifyData();
 ```
