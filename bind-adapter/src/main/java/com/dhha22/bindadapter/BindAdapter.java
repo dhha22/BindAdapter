@@ -2,6 +2,7 @@ package com.dhha22.bindadapter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -85,7 +86,6 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
                 ((ItemView) holder.itemView).setData(items.get(absPosition));
             }
         } else {
-            setStaggeredGridHeader(holder);
             if (position < headerSize && getHeaderItemSize() > 0 && (getHeaderItemSize() - 1) >= position) {   // header
                 ((ItemView) holder.itemView).setData(headerItems.get(position));
             } else if (position >= (headerSize + itemCount) &&
@@ -95,15 +95,6 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
 
         }
     }
-
-    private void setStaggeredGridHeader(RecyclerView.ViewHolder holder) {
-        if (holder.itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams) {
-            StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) holder.itemView.getLayoutParams();
-            params.setFullSpan(true);
-            holder.itemView.setLayoutParams(params);
-        }
-    }
-
 
     @Override
     public BindAdapter addHeaderView(Class<? extends ItemView> layoutClass) {

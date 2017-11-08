@@ -44,7 +44,6 @@ public class SimpleModeMVPFragment extends Fragment implements SimpleModeContrac
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        recyclerView = new RecyclerView(getContext());
         View view = inflater.inflate(R.layout.fragment_simple_mode, container, false);
         bindView(view);
 
