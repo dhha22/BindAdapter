@@ -26,8 +26,6 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
     private static final int DEFAULT = 1;
     private static final String HEADER = "header_";
     private static final String FOOTER = "footer_";
-    private int headerSize;
-    private int footerSize;
     private int itemCount;
     private final List<Integer> headerHashes = new ArrayList<>();
     private final List<Integer> footerHashes = new ArrayList<>();
@@ -47,7 +45,7 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
         if (headerHashes.contains(viewType)) {
             for (ItemView view : headerViews) {
                 if (view.getTag(R.id.tag) != null && Integer.valueOf(view.getTag(R.id.tag).toString()) == viewType) {
-                    Log.v(TAG, "header holder");
+                    Log.d(TAG, "header holder");
                     return new HeaderFooterHolder(view);
                 }
             }
@@ -56,17 +54,17 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
         if (footerHashes.contains(viewType)) {
             for (ItemView view : footerViews) {
                 if (view.getTag(R.id.tag) != null && Integer.valueOf(view.getTag(R.id.tag).toString()) == viewType) {
-                    Log.v(TAG, "footer holder");
+                    Log.d(TAG, "footer holder");
                     return new HeaderFooterHolder(view);
                 }
             }
         }
 
         if (innerAdapter != null) {
-            Log.v(TAG, "inner holder");
+            Log.d(TAG, "inner holder");
             return innerAdapter.onCreateViewHolder(parent, viewType);
         } else {
-            Log.v(TAG, "simple holder");
+            Log.d(TAG, "simple holder");
             return new SimpleHolder(getItemView(layoutClass));
         }
     }
@@ -79,18 +77,18 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (!(holder instanceof HeaderFooterHolder)) {  // item
-            int absPosition = position - headerSize;
+            int absPosition = position - getHeaderViewSize();
             if (innerAdapter != null) {
                 innerAdapter.onBindViewHolder(holder, absPosition);
             } else if (layoutClass != null) {
                 ((ItemView) holder.itemView).setData(items.get(absPosition));
             }
         } else {
-            if (position < headerSize && getHeaderItemSize() > 0 && (getHeaderItemSize() - 1) >= position) {   // header
+            if (position < getHeaderViewSize() && getHeaderItemSize() > 0 && (getHeaderItemSize() - 1) >= position) {   // header
                 ((ItemView) holder.itemView).setData(headerItems.get(position));
-            } else if (position >= (headerSize + itemCount) &&
-                    getFooterItemSize() > 0 && getFooterItemSize() >= (position - headerSize - itemCount)) { // footer
-                ((ItemView) holder.itemView).setData(footerItems.get(position - headerSize - itemCount));
+            } else if (position >= (getHeaderViewSize() + itemCount) &&
+                    getFooterItemSize() > 0 && getFooterItemSize() >= (position - getHeaderViewSize() - itemCount)) { // footer
+                ((ItemView) holder.itemView).setData(footerItems.get(position - getHeaderViewSize() - itemCount));
             }
 
         }
@@ -101,9 +99,10 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
         ItemView v = getItemView(layoutClass);
         if (v != null && headerViews.indexOf(v) == -1) {
             headerViews.add(v);
-            int hash = (HEADER + headerViews.indexOf(v)).hashCode();
+            int hash = (HEADER + headerViews.indexOf(v) + v).hashCode();
             v.setTag(R.id.tag, hash);
             headerHashes.add(hash);
+            Log.d(TAG, "addHeaderViewHash: " + hash);
             notifyItemInserted(headerViews.size() - 1);
         }
         return this;
@@ -116,16 +115,27 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
 
     @Override
     public int getHeaderViewSize() {
-        return headerSize;
+        return headerViews.size();
     }
 
     @Override
-    public void removeAllHeaderView() {
-        int size = headerViews.size();
-        if (size > 0) {
+    public void removeHeaderView(int position) {
+        if (position >= 0 && position < headerViews.size()) {
+            removeHeaderItem(position);
+            headerViews.remove(position);
+            Log.d(TAG, "removeHeaderViewHash: " + headerHashes.get(position));
+            headerHashes.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    @Override
+    public void clearHeaderView() {
+        if (headerViews.size() > 0) {
+            clearHeaderItem();
             headerViews.clear();
             headerHashes.clear();
-            notifyItemRangeRemoved(0, size);
+            notifyItemRangeRemoved(0, headerViews.size());
         }
     }
 
@@ -142,14 +152,31 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
     }
 
     @Override
+    public void removeItemView(int position) {
+        Log.d(TAG, "removeItemView: " + position);
+        if (position < getHeaderViewSize()) {
+            Log.d(TAG, "removeHeaderView position: " + position);
+            removeHeaderView(position);
+        } else if (position >= getHeaderViewSize() && position < getHeaderViewSize() + getItemSize()) {
+            Log.d(TAG, "removeItemView position: " + (position - getHeaderViewSize()));
+            removeItem(position - getHeaderViewSize());
+            notifyItemRemoved(position);
+        } else {
+            Log.d(TAG, "removeFooterView position: " + (position - (getHeaderViewSize() + getItemSize())));
+            removeFooterView(position - (getHeaderViewSize() + getItemSize()));
+        }
+    }
+
+    @Override
     public BindAdapter addFooterView(Class<? extends ItemView> layoutClass) {
         ItemView v = getItemView(layoutClass);
         if (v != null && footerViews.indexOf(v) == -1) {
             footerViews.add(v);
-            int hash = (FOOTER + footerViews.indexOf(v)).hashCode();
+            int hash = (FOOTER + footerViews.indexOf(v) + v).hashCode();
             v.setTag(R.id.tag, hash);
             footerHashes.add(hash);
-            notifyItemInserted(headerSize + itemCount + footerViews.size() - 1);
+            Log.d(TAG, "addFooterViewHash: " + hash);
+            notifyItemInserted(getHeaderViewSize() + itemCount + getFooterViewSize() - 1);
         }
         return this;
     }
@@ -161,33 +188,45 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
 
     @Override
     public int getFooterViewSize() {
-        return footerSize;
+        return footerViews.size();
     }
 
     @Override
-    public void removeAllFooterView() {
-        footerViews.clear();
-        footerHashes.clear();
-        notifyDataSetChanged();
+    public void removeFooterView(int position) {
+        if (position >= 0 && position < getFooterViewSize()) {
+            removeFooterItem(position);
+            footerViews.remove(position);
+            Log.d(TAG, "removeFooterViewHash: " + footerHashes.get(position));
+            footerHashes.remove(position);
+            notifyItemRemoved(getHeaderViewSize() + getItemSize() + position);
+        }
+    }
+
+    @Override
+    public void clearFooterView() {
+        if (getFooterViewSize() > 0) {
+            clearFooterItem();
+            footerViews.clear();
+            footerHashes.clear();
+            notifyItemRangeRemoved(getHeaderItemSize() + getItemSize(), getFooterViewSize());
+        }
     }
 
     @Override
     public int getItemCount() {
-        headerSize = headerViews.size();
         itemCount = innerAdapter != null ? innerAdapter.getItemCount() : items.size();
-        footerSize = footerViews.size();
-        return headerSize + itemCount + footerSize;
+        return getHeaderViewSize() + itemCount + getFooterViewSize();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position < headerSize) {    // header 일 경우
+        if (position < getHeaderViewSize()) {    // header 일 경우
             return headerHashes.size() > position ? headerHashes.get(position) : 0;
-        } else if (position >= headerSize + itemCount) { // footer 일 경우
-            position -= (headerSize + itemCount);
+        } else if (position >= getHeaderViewSize() + itemCount) { // footer 일 경우
+            position -= (getHeaderViewSize() + itemCount);
             return footerHashes.size() > position ? footerHashes.get(position) : 0;
         } else {    // item 일 경우
-            position -= headerSize;
+            position -= getHeaderViewSize();
             return innerAdapter != null ? innerAdapter.getItemViewType(position) : DEFAULT;
         }
     }

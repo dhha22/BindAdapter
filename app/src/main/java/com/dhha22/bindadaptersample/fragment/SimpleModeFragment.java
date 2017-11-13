@@ -1,8 +1,10 @@
 package com.dhha22.bindadaptersample.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,8 +37,6 @@ public class SimpleModeFragment extends Fragment {
     private Button addFirstItemBtn;
     private Button addItemBtn;
     private Button addFooterBtn;
-    private Button changeOrientationBtn;
-    private TextView orientationTxt;
     private RecyclerView recyclerView;
 
     public static SimpleModeFragment getInstance() {
@@ -116,32 +116,23 @@ public class SimpleModeFragment extends Fragment {
 
         adapter.setOnItemLongClickListener(new OnItemLongClickListener() {
             @Override
-            public void onItemLongClick(View view, int position) {
-                Toast.makeText(getContext(), "long click current position: " + position, Toast.LENGTH_SHORT).show();
+            public void onItemLongClick(View view, final int position) {
+                new AlertDialog.Builder(getContext())
+                        .setMessage("Do you want to delete this item?")
+                        .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                adapter.removeItemView(position);
+                            }
+                        })
+                        .setNegativeButton("no", null)
+                        .show();
             }
         });
-
-        changeOrientationBtn.setOnClickListener(changeOrientationListener);
 
         return view;
     }
 
-    private View.OnClickListener changeOrientationListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (layoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {
-                    orientationTxt.setText("orientation: vertical");
-                    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-                } else {
-                    orientationTxt.setText("orientation: horizontal");
-                    layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                }
-                recyclerView.setLayoutManager(layoutManager);
-            }
-        }
-    };
 
     private void bindView(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -149,9 +140,6 @@ public class SimpleModeFragment extends Fragment {
         addFirstItemBtn = view.findViewById(R.id.addFirstItemBtn);
         addItemBtn = view.findViewById(R.id.addItemBtn);
         addFooterBtn = view.findViewById(R.id.addFooterBtn);
-        changeOrientationBtn = view.findViewById(R.id.changeOrientationBtn);
-        orientationTxt = view.findViewById(R.id.orientationTxt);
-
     }
 
 }

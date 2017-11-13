@@ -40,7 +40,14 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     }
 
     @Override
-    public void clearHeaderItem(Item item) {
+    public void removeHeaderItem(int position) {
+        if (position >= 0 && position < headerItems.size()) {
+            headerItems.remove(position);
+        }
+    }
+
+    @Override
+    public void clearHeaderItem() {
         headerItems.clear();
     }
 
@@ -65,7 +72,8 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
 
     @Override
     public void removeItem(int position) {
-        items.remove(position);
+        if (position >= 0 && position < items.size())
+            items.remove(position);
     }
 
     @Override
@@ -101,7 +109,14 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     }
 
     @Override
-    public void clearFooterItem(Item item) {
+    public void removeFooterItem(int position) {
+        if (position >= 0 && position < footerItems.size()) {
+            footerItems.remove(position);
+        }
+    }
+
+    @Override
+    public void clearFooterItem() {
         footerItems.clear();
     }
 

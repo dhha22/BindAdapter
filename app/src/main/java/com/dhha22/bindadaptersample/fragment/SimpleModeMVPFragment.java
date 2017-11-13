@@ -24,14 +24,12 @@ import com.dhha22.bindadaptersample.view.SimpleListItemView;
  * Created by DavidHa on 2017. 11. 1..
  */
 
-public class SimpleModeMVPFragment extends Fragment implements SimpleModeContract.View{
+public class SimpleModeMVPFragment extends Fragment implements SimpleModeContract.View {
     private SimpleModePresenter presenter;
     private Button addHeaderBtn;
     private Button addFirstItemBtn;
     private Button addItemBtn;
     private Button addFooterBtn;
-    private Button changeOrientationBtn;
-    private TextView orientationTxt;
     private RecyclerView recyclerView;
 
     @Override
@@ -92,7 +90,6 @@ public class SimpleModeMVPFragment extends Fragment implements SimpleModeContrac
 
         adapter.setOnItemLongClickListener(presenter);
 
-        changeOrientationBtn.setOnClickListener(changeOrientationListener);
 
         return view;
     }
@@ -102,22 +99,6 @@ public class SimpleModeMVPFragment extends Fragment implements SimpleModeContrac
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private View.OnClickListener changeOrientationListener = new View.OnClickListener() {
-       @Override
-       public void onClick(View v) {
-           if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-               LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-               if (layoutManager.getOrientation() == LinearLayoutManager.HORIZONTAL) {
-                   orientationTxt.setText("orientation: vertical");
-                   layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-               } else {
-                   orientationTxt.setText("orientation: horizontal");
-                   layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-               }
-               recyclerView.setLayoutManager(layoutManager);
-           }
-       }
-   };
 
     private void bindView(View view) {
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -125,8 +106,6 @@ public class SimpleModeMVPFragment extends Fragment implements SimpleModeContrac
         addFirstItemBtn = view.findViewById(R.id.addFirstItemBtn);
         addItemBtn = view.findViewById(R.id.addItemBtn);
         addFooterBtn = view.findViewById(R.id.addFooterBtn);
-        changeOrientationBtn = view.findViewById(R.id.changeOrientationBtn);
-        orientationTxt = view.findViewById(R.id.orientationTxt);
     }
 
     @Override
