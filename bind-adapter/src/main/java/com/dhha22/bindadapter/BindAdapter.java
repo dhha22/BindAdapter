@@ -109,6 +109,20 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
     }
 
     @Override
+    public BindAdapter addHeaderView(int position, Class<? extends ItemView> layoutClass) {
+        ItemView v = getItemView(layoutClass);
+        if (v != null && headerViews.indexOf(v) == -1) {
+            headerViews.add(position, v);
+            int hash = (HEADER + headerViews.indexOf(v) + v).hashCode();
+            v.setTag(R.id.tag, hash);
+            headerHashes.add(position, hash);
+            Log.d(TAG, "addHeaderViewHash: " + hash);
+            notifyItemInserted(position);
+        }
+        return this;
+    }
+
+    @Override
     public ItemView getHeaderView(int position) {
         return headerViews.get(position);
     }
@@ -177,6 +191,20 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
             footerHashes.add(hash);
             Log.d(TAG, "addFooterViewHash: " + hash);
             notifyItemInserted(getHeaderViewSize() + itemCount + getFooterViewSize() - 1);
+        }
+        return this;
+    }
+
+    @Override
+    public BindAdapter addFooterView(int position, Class<? extends ItemView> layoutClass) {
+        ItemView v = getItemView(layoutClass);
+        if (v != null && footerViews.indexOf(v) == -1) {
+            footerViews.add(position, v);
+            int hash = (FOOTER + footerViews.indexOf(v) + v).hashCode();
+            v.setTag(R.id.tag, hash);
+            footerHashes.add(position, hash);
+            Log.d(TAG, "addFooterViewHash: " + hash);
+            notifyItemInserted(getHeaderViewSize() + itemCount + position);
         }
         return this;
     }

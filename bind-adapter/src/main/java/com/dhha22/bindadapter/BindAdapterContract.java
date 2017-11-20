@@ -14,6 +14,8 @@ public interface BindAdapterContract {
 
         BindAdapter addHeaderView(Class<? extends ItemView> layoutClass);
 
+        BindAdapter addHeaderView(int position, Class<? extends ItemView> layoutClass);
+
         ItemView getHeaderView(int position);
 
         void removeHeaderView(int position);
@@ -38,6 +40,8 @@ public interface BindAdapterContract {
         // Footer
 
         BindAdapter addFooterView(Class<? extends ItemView> layoutClass);
+
+        BindAdapter addFooterView(int position, Class<? extends ItemView> layoutClass);
 
         ItemView getFooterView(int position);
 
