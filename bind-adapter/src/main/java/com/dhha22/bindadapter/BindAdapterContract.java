@@ -61,6 +61,8 @@ public interface BindAdapterContract {
 
         void setHeaderItem(int position, Item item);
 
+        Item getHeaderItem(int position);
+
         void removeHeaderItem(int position);
 
         void clearHeaderItem();
@@ -88,6 +90,8 @@ public interface BindAdapterContract {
         void addFooterItem(Item item);
 
         void setFooterItem(int position, Item item);
+
+        Item getFooterItem(int position);
 
         void removeFooterItem(int position);
 
