@@ -83,7 +83,14 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
 
     @Override
     public Item getItem(int position) {
-        return items.get(position);
+        if (headerItems.size() > 0 && headerItems.size() > position) {
+            return headerItems.get(position);
+        } else if (items.size() > position) {
+            return items.get(headerItems.size() + position);
+        } else {
+            return footerItems.get(headerItems.size() + items.size() + position);
+        }
+
     }
 
     @Override

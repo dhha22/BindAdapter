@@ -6,7 +6,7 @@ ext {
     minSdkVersion = 15
 
     versionCode = 1
-    libraryVersionName = '0.3.0-beta'
+    libraryVersionName = '0.3.1-beta'
     libraryName = 'bind-adapter'
 
     // Bintray setting info
