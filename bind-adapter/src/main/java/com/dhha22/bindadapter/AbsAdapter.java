@@ -90,7 +90,6 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     @Override
     public Item getItem(int position) {
         return items.get(position);
-
     }
 
     @Override

@@ -161,11 +161,6 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
     }
 
     @Override
-    public ItemView getItemView() {
-        return getItemView(layoutClass);
-    }
-
-    @Override
     public void removeItemView(int position) {
         Log.d(TAG, "removeItemView: " + position);
         if (position < getHeaderViewSize()) {

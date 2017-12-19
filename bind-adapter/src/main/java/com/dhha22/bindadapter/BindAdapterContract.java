@@ -28,8 +28,6 @@ public interface BindAdapterContract {
 
         BindAdapter addLayout(Class<? extends ItemView> layoutClass);
 
-        ItemView getItemView();
-
         void removeItemView(int position);
 
         void setOnItemClickListener(OnItemClickListener itemClickListener);
