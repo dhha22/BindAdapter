@@ -103,7 +103,7 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
             v.setTag(R.id.tag, hash);
             headerHashes.add(hash);
             Log.d(TAG, "addHeaderViewHash: " + hash);
-            notifyItemInserted(headerViews.size() - 1);
+            notifyDataInserted(headerViews.size() - 1);
         }
         return this;
     }
@@ -117,7 +117,7 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
             v.setTag(R.id.tag, hash);
             headerHashes.add(position, hash);
             Log.d(TAG, "addHeaderViewHash: " + hash);
-            notifyItemInserted(position);
+            notifyDataInserted(position);
         }
         return this;
     }
@@ -185,7 +185,7 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
             v.setTag(R.id.tag, hash);
             footerHashes.add(hash);
             Log.d(TAG, "addFooterViewHash: " + hash);
-            notifyItemInserted(getHeaderViewSize() + itemCount + getFooterViewSize() - 1);
+            notifyDataInserted(getHeaderViewSize() + itemCount + getFooterViewSize() - 1);
         }
         return this;
     }
@@ -199,7 +199,7 @@ public class BindAdapter extends AbsAdapter implements BindAdapterContract.View 
             v.setTag(R.id.tag, hash);
             footerHashes.add(position, hash);
             Log.d(TAG, "addFooterViewHash: " + hash);
-            notifyItemInserted(getHeaderViewSize() + itemCount + position);
+            notifyDataInserted(getHeaderViewSize() + itemCount + position);
         }
         return this;
     }

@@ -17,15 +17,6 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     protected List<Item> footerItems = new ArrayList<>();
     protected List<Item> items = new ArrayList<>();
     private final Handler handler = new Handler();
-    private final Runnable notifyRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if (innerAdapter != null) {
-                innerAdapter.notifyDataSetChanged();
-            }
-            notifyDataSetChanged();
-        }
-    };
 
     // Header
 
@@ -139,7 +130,28 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
 
     @Override
     public void notifyData() {
-        handler.post(notifyRunnable);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (innerAdapter != null) {
+                    innerAdapter.notifyDataSetChanged();
+                }
+                notifyDataSetChanged();
+            }
+        });
+    }
+
+    @Override
+    public void notifyDataInserted(final int position) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if(innerAdapter != null) {
+                    innerAdapter.notifyItemInserted(position);
+                }
+                notifyDataInserted(position);
+            }
+        });
     }
 
     @Override
