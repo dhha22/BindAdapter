@@ -1,12 +1,12 @@
 ext {
     // Build SDK version
-    buildToolsVersion = '26.0.1'
-    compileSdkVersion = 26
-    targetSdkVersion = 26
+    buildToolsVersion = '27.0.3'
+    compileSdkVersion = 27
+    targetSdkVersion = 27
     minSdkVersion = 15
 
     versionCode = 1
-    libraryVersionName = '0.3.3-beta'
+    libraryVersionName = '0.3.4-beta'
     libraryName = 'bind-adapter'
 
     // Bintray setting info
@@ -23,7 +23,7 @@ ext {
 
 
     // Dependencies version
-    supportLibraryVersion = '26.0.1'
+    supportLibraryVersion = '27.0.3'
 
     // Testing-only
     junitLibVersion = '4.12'
