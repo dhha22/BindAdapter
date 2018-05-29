@@ -149,7 +149,7 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
                 if(innerAdapter != null) {
                     innerAdapter.notifyItemInserted(position);
                 }
-                notifyDataInserted(position);
+                notifyItemInserted(position);
             }
         });
     }
