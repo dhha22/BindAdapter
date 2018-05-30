@@ -99,7 +99,6 @@ public interface BindAdapterContract {
 
         void notifyData();
 
-        void notifyDataInserted(int position);
 
         int getTotalItemSize();
     }

@@ -142,19 +142,6 @@ public abstract class AbsAdapter extends RecyclerView.Adapter implements BindAda
     }
 
     @Override
-    public void notifyDataInserted(final int position) {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if(innerAdapter != null) {
-                    innerAdapter.notifyItemInserted(position);
-                }
-                notifyItemInserted(position);
-            }
-        });
-    }
-
-    @Override
     public int getTotalItemSize() {
         return headerItems.size() + items.size() + footerItems.size();
     }
