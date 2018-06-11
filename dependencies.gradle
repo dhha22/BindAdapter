@@ -25,16 +25,10 @@ ext {
     // Dependencies version
     supportLibraryVersion = '27.0.3'
 
-    // Testing-only
-    junitLibVersion = '4.12'
-    espressoLibVersion = '2.2.2'
-
 
     // Support library Dependencies
     appCompat = "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
 
-    // Testing-only dependencies
-    junit = "junit:junit:$rootProject.ext.junitLibVersion"
 
-    espressoCore = "com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoLibVersion"
+
 }
