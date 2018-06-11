@@ -18,11 +18,13 @@ public class ItemView extends FrameLayout {
     protected Item data;
     private Context context;
     public ItemView(@NonNull Context context) {
-        this(context, null);
+        super(context);
+        this.context = context;
     }
 
     public ItemView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        this.context = context;
     }
 
     public ItemView(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {

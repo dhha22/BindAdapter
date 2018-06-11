@@ -58,6 +58,7 @@ public class CustomModeFragment extends Fragment {
 
         recyclerView.setAdapter(adapter);
         adapter.setInnerAdapter(innerAdapter);
+        adapter.addItem(new Feed("A"));
 
         addDummyData();
 
