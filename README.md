@@ -15,7 +15,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.dhha22.bindadapter:bind-adapter:0.3.6-beta@aar'
+    compile 'com.dhha22.bindadapter:bind-adapter:1.0.0@aar'
 }
 
 ```
