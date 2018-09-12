@@ -3,6 +3,8 @@ package com.dhha22.bindadapter;
 import com.dhha22.bindadapter.listener.OnItemClickListener;
 import com.dhha22.bindadapter.listener.OnItemLongClickListener;
 
+import java.util.List;
+
 /**
  * Created by DavidHa on 2017. 10. 16..
  */
@@ -61,6 +63,8 @@ public interface BindAdapterContract {
 
         Item getHeaderItem(int position);
 
+        List<Item> getHeaderItems();
+
         void removeHeaderItem(int position);
 
         void clearHeaderItem();
@@ -79,6 +83,8 @@ public interface BindAdapterContract {
 
         Item getItem(int position);
 
+        List<Item> getItems();
+
         void clearItem();
 
         int getItemSize();
@@ -90,6 +96,8 @@ public interface BindAdapterContract {
         void setFooterItem(int position, Item item);
 
         Item getFooterItem(int position);
+
+        List<Item> getFooterItems();
 
         void removeFooterItem(int position);
 
